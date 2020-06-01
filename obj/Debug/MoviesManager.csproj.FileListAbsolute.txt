@@ -59,7 +59,6 @@ C:\Users\blaiz\Desktop\Movies Manager\bin\roslyn\vbc.rsp
 C:\Users\blaiz\Desktop\Movies Manager\bin\roslyn\VBCSCompiler.exe
 C:\Users\blaiz\Desktop\Movies Manager\bin\roslyn\VBCSCompiler.exe.config
 <<<<<<< HEAD
-<<<<<<< HEAD
 D:\ASP\PFI_PP_BF\PFI-WEB\bin\MoviesManager.dll.config
 D:\ASP\PFI_PP_BF\PFI-WEB\bin\MoviesManager.dll
 D:\ASP\PFI_PP_BF\PFI-WEB\bin\MoviesManager.pdb
@@ -118,7 +117,6 @@ D:\ASP\PFI_PP_BF\PFI-WEB\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.
 D:\ASP\PFI_PP_BF\PFI-WEB\obj\Debug\MoviesManager.csproj.CopyComplete
 D:\ASP\PFI_PP_BF\PFI-WEB\obj\Debug\MoviesManager.dll
 D:\ASP\PFI_PP_BF\PFI-WEB\obj\Debug\MoviesManager.pdb
-=======
 =======
 >>>>>>> c9598a41e904637d6848531951418af9a1c754d5
 C:\Users\blaiz\Documents\School\Web\PFI\bin\MoviesManager.dll.config
@@ -181,7 +179,4 @@ C:\Users\blaiz\Documents\School\Web\PFI\obj\Debug\MoviesManager.csproj.CoreCompi
 C:\Users\blaiz\Documents\School\Web\PFI\obj\Debug\MoviesManager.csproj.CopyComplete
 C:\Users\blaiz\Documents\School\Web\PFI\obj\Debug\MoviesManager.dll
 C:\Users\blaiz\Documents\School\Web\PFI\obj\Debug\MoviesManager.pdb
-<<<<<<< HEAD
->>>>>>> c9598a41e904637d6848531951418af9a1c754d5
-=======
->>>>>>> c9598a41e904637d6848531951418af9a1c754d5
+D:\ASP\PFI_PP_BF\PFI-WEB\obj\Debug\MoviesManager.csprojAssemblyReference.cache

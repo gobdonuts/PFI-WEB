@@ -185,6 +185,7 @@
     <Content Include="App_Data\DB_log.ldf">
       <DependentUpon>DB.mdf</DependentUpon>
     </Content>
+    <Content Include="Avatars\no_avatar.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
