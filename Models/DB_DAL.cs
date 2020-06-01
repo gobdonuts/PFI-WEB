@@ -19,18 +19,35 @@ namespace MoviesManager.Models
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Requis")]
+        [Display(Name = "Titre")]
+        public string Synopsis { get; set; }
+
+        [Required(ErrorMessage = "Requis")]
         [Display(Name = "Auteur")]
         public string Author { get; set; }
+        public int AudienceId { get; set; }
+        public int StyleId { get; set; }
 
+        [Required(ErrorMessage = "Requis")]
         [Display(Name = "Année")]
-        public int ReleaseYear { get; set; }
+        public int Year { get; set; }
+        public string PosterId { get; set; }
+        public double RatingsAverage { get; set; }
+        public int NbRatings { get; set; }
+
 
         public void ToFilm(Film film)
         {
             film.Id = Id;
             film.Title = Title;
+            film.Synopsis = Synopsis;
             film.Author = Author;
-            film.ReleaseYear = ReleaseYear;
+            film.AudienceId = AudienceId;
+            film.StyleId = StyleId;
+            film.Year = Year;
+            film.PosterId = PosterId;
+            film.RatingsAverage = RatingsAverage;
+            film.NbRatings = NbRatings;
         }
     }
 
@@ -98,8 +115,14 @@ namespace MoviesManager.Models
             {
                 Id = film.Id,
                 Title = film.Title,
+                Synopsis = film.Synopsis,
                 Author = film.Author,
-                ReleaseYear = film.ReleaseYear
+                AudienceId = film.AudienceId,
+                StyleId = film.StyleId,
+                Year = film.Year,
+                PosterId = film.PosterId,
+                RatingsAverage = film.RatingsAverage,
+                NbRatings = film.NbRatings
             };
         }
         public static ActorView ToActorView(this Actor actor)
@@ -243,12 +266,12 @@ namespace MoviesManager.Models
         }
         private static bool SetFilmCastings(DBEntities DB, int film_Id, List<int> actorsIdList)
         {
-            DB.Castings.RemoveRange(DB.Castings.Where(c => c.Film_Id == film_Id));
+            DB.Castings.RemoveRange(DB.Castings.Where(c => c.FilmId == film_Id));
             if (actorsIdList != null)
             {
                 foreach (int actor_Id in actorsIdList)
                 {
-                    Casting casting = new Casting() { Actor_Id = actor_Id, Film_Id = film_Id };
+                    Casting casting = new Casting() { ActorId = actor_Id, FilmId = film_Id };
                     DB.Castings.Add(casting);
                 }
             }
@@ -290,12 +313,12 @@ namespace MoviesManager.Models
         }
         private static bool SetActorCastings(DBEntities DB, int actor_Id, List<int> filmsIdList)
         {
-            DB.Castings.RemoveRange(DB.Castings.Where(c => c.Actor_Id == actor_Id));
+            DB.Castings.RemoveRange(DB.Castings.Where(c => c.ActorId == actor_Id));
             if (filmsIdList != null)
             {
                 foreach (int film_Id in filmsIdList)
                 {
-                    Casting casting = new Casting() { Actor_Id = actor_Id, Film_Id = film_Id };
+                    Casting casting = new Casting() { ActorId = actor_Id, FilmId = film_Id };
                     DB.Castings.Add(casting);
                 }
             }

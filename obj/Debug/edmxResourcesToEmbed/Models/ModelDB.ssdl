@@ -6,26 +6,77 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
     <Property Name="BirthDate" Type="datetime" Nullable="false" />
+    <Property Name="Sexe" Type="int" Nullable="false" />
+    <Property Name="PhotoId" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Audiences">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="Castings">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Film_Id" Type="int" Nullable="false" />
-    <Property Name="Actor_Id" Type="int" Nullable="false" />
+    <Property Name="FilmId" Type="int" Nullable="false" />
+    <Property Name="ActorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Films">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Author" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="ReleaseYear" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Synopsis" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Author" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AudienceId" Type="int" Nullable="false" />
+    <Property Name="StyleId" Type="int" Nullable="false" />
+    <Property Name="Year" Type="int" Nullable="false" />
+    <Property Name="PosterId" Type="nvarchar(max)" />
+    <Property Name="RatingsAverage" Type="float" Nullable="false" />
+    <Property Name="NbRatings" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Castings_To_Actors">
+  <EntityType Name="Ratings">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilmId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Styles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Admin" Type="bit" Nullable="false" />
+    <Property Name="AvatarId" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_Castings_Actors">
     <End Role="Actors" Type="Self.Actors" Multiplicity="1" />
     <End Role="Castings" Type="Self.Castings" Multiplicity="*" />
     <ReferentialConstraint>
@@ -33,11 +84,11 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Castings">
-        <PropertyRef Name="Actor_Id" />
+        <PropertyRef Name="ActorId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Castings_To_Films">
+  <Association Name="FK_Castings_Films">
     <End Role="Films" Type="Self.Films" Multiplicity="1" />
     <End Role="Castings" Type="Self.Castings" Multiplicity="*" />
     <ReferentialConstraint>
@@ -45,21 +96,58 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Castings">
-        <PropertyRef Name="Film_Id" />
+        <PropertyRef Name="FilmId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ratings_Films">
+    <End Role="Films" Type="Self.Films" Multiplicity="1" />
+    <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Films">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ratings">
+        <PropertyRef Name="FilmId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ratings_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ratings">
+        <PropertyRef Name="UserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="DBModelStoreContainer">
     <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Audiences" EntityType="Self.Audiences" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Castings" EntityType="Self.Castings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Castings_To_Actors" Association="Self.FK_Castings_To_Actors">
+    <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Styles" EntityType="Self.Styles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Castings_Actors" Association="Self.FK_Castings_Actors">
       <End Role="Actors" EntitySet="Actors" />
       <End Role="Castings" EntitySet="Castings" />
     </AssociationSet>
-    <AssociationSet Name="FK_Castings_To_Films" Association="Self.FK_Castings_To_Films">
+    <AssociationSet Name="FK_Castings_Films" Association="Self.FK_Castings_Films">
       <End Role="Films" EntitySet="Films" />
       <End Role="Castings" EntitySet="Castings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ratings_Films" Association="Self.FK_Ratings_Films">
+      <End Role="Films" EntitySet="Films" />
+      <End Role="Ratings" EntitySet="Ratings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ratings_Users" Association="Self.FK_Ratings_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Ratings" EntitySet="Ratings" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
