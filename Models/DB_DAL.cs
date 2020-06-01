@@ -7,6 +7,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using System.Web;
+using MoviesManager.Models;
 
 namespace MoviesManager.Models
 {
@@ -50,7 +51,8 @@ namespace MoviesManager.Models
             film.NbRatings = NbRatings;
         }
     }
-
+    
+   
     public class ActorView
     {
         public int Id { get; set; }
@@ -70,7 +72,87 @@ namespace MoviesManager.Models
             actor.BirthDate = BirthDate;
         }
     }
+    public static class OnlineUsers
+    {
+        public static List<User> Users
+        {
+            get
+            {
+                if (HttpRuntime.Cache["OnLineUsers"] == null)
+                {
+                    HttpRuntime.Cache["OnLineUsers"] = new List<User>();
+                }
+                return (List<User>)HttpRuntime.Cache["OnLineUsers"];
+            }
+        }
+        public static int IdProvider
+        { // Cet accesseur ne sera plus utile lorsque vous aurez implanter la nouvelle approche d'authentification
+            get
+            {
+                if (HttpRuntime.Cache["IdProvider"] == null)
+                {
+                    HttpRuntime.Cache["IdProvider"] = 0;
+                }
+                HttpRuntime.Cache["IdProvider"] = (int)HttpRuntime.Cache["IdProvider"] + 1;
+                return (int)HttpRuntime.Cache["IdProvider"];
+            }
+        }
+        public static DateTime LastUpdate
+        {
+            get
+            {
+                if (HttpRuntime.Cache["LastOnLineUsersUpdate"] == null)
+                {
+                    HttpRuntime.Cache["LastOnLineUsersUpdate"] = new DateTime(0);
+                }
+                return (DateTime)HttpRuntime.Cache["LastOnLineUsersUpdate"];
+            }
+            set { HttpRuntime.Cache["LastOnLineUsersUpdate"] = value; }
+        }
+        public static void AddSessionUser(User user)
+        {
+            user.Id = IdProvider;
+            LastUpdate = DateTime.Now;
+            Users.Add(user);
+            HttpContext.Current.Session["User"] = user;
+            HttpContext.Current.Session.Timeout = 15; // minutes
+        }
+        public static List<User> ToList()
+        {
+            return Users;
+        }
+        public static User Find(int userId)
+        {
 
+            return OnlineUsers.ToList().Where(u => u.Id == userId).FirstOrDefault();
+        }
+        public static UserView FindId(string userName)
+        {
+            UserView user = OnlineUsers.ToList().Where(u => u.FullName == userName).FirstOrDefault().ToUserView();
+            return user;
+        }
+        public static bool NeedUpdate(DateTime date)
+        {
+            return DateTime.Compare(date, LastUpdate) < 0;
+        }
+        public static void RemoveSessionUser()
+        {
+            User user = GetSessionUser();
+            if (user != null)
+            {
+                Users.Remove(user);
+                LastUpdate = DateTime.Now;
+                HttpContext.Current.Session.Abandon();
+            }
+        }
+        public static User GetSessionUser()
+        {
+            if (HttpContext.Current != null)
+                return (User)HttpContext.Current.Session["User"];
+            return null;
+        }
+    }
+    
     public static class DB_DAL_ExtensionsMethods
     {
         private static DbContextTransaction Transaction

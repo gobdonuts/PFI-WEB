@@ -16,7 +16,6 @@ namespace MoviesManager.Controllers
             DB.Dispose();
             base.Dispose(disposing);
         }
-        //Creer la vue sbscribe
         public ActionResult Subscribe()
         {
             return View();
@@ -89,17 +88,10 @@ namespace MoviesManager.Controllers
             User currentUser = OnlineUsers.GetSessionUser();
             if (currentUser != null)
             {
-                ReversiGame game = Games.Find(currentUser.Id);
                 OnlineUsers.RemoveSessionUser();
-
-                if (game != null)
-                {
-                    game.PlayersStillOnLine();
-                }
             }
             return RedirectToAction("Login");
         }
-        [UserAcces]
         public ActionResult Profil()
         {
             UserView userView = OnlineUsers.GetSessionUser().ToUserView();
