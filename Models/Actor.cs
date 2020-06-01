@@ -19,7 +19,6 @@ namespace MoviesManager.Models
         {
             this.Castings = new HashSet<Casting>();
         }
-        public int cool;
         public int Id { get; set; }
         public string Name { get; set; }
         public System.DateTime BirthDate { get; set; }
