@@ -8,7 +8,7 @@
             @Html.DisplayNameFor(model => model.Author)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ReleaseYear)
+            @Html.DisplayNameFor(model => model.Year)
         </th>
         <th></th>
         @if ((bool)ViewBag.ShowCrudCommand)
@@ -30,7 +30,7 @@
                 @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ReleaseYear)
+                @Html.DisplayFor(modelItem => item.Year)
             </td>
             <td>
                 @Helper.FlashButton("Details/" + item.Id, "Films", "iconDetails", "Détails", "left")

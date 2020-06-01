@@ -18,14 +18,23 @@ namespace MoviesManager.Models
         public Film()
         {
             this.Castings = new HashSet<Casting>();
+            this.Ratings = new HashSet<Rating>();
         }
     
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Synopsis { get; set; }
         public string Author { get; set; }
-        public int ReleaseYear { get; set; }
+        public int AudienceId { get; set; }
+        public int StyleId { get; set; }
+        public int Year { get; set; }
+        public string PosterId { get; set; }
+        public double RatingsAverage { get; set; }
+        public int NbRatings { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Casting> Castings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rating> Ratings { get; set; }
     }
 }

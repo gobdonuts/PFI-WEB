@@ -15,8 +15,8 @@ namespace MoviesManager.Models
     public partial class Casting
     {
         public int Id { get; set; }
-        public int Film_Id { get; set; }
-        public int Actor_Id { get; set; }
+        public int FilmId { get; set; }
+        public int ActorId { get; set; }
     
         public virtual Actor Actor { get; set; }
         public virtual Film Film { get; set; }

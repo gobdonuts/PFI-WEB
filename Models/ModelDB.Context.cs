@@ -26,7 +26,12 @@ namespace MoviesManager.Models
         }
     
         public virtual DbSet<Actor> Actors { get; set; }
+        public virtual DbSet<Audience> Audiences { get; set; }
         public virtual DbSet<Casting> Castings { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Film> Films { get; set; }
+        public virtual DbSet<Rating> Ratings { get; set; }
+        public virtual DbSet<Style> Styles { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

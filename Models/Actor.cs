@@ -19,9 +19,13 @@ namespace MoviesManager.Models
         {
             this.Castings = new HashSet<Casting>();
         }
+    
         public int Id { get; set; }
         public string Name { get; set; }
+        public int CountryId { get; set; }
         public System.DateTime BirthDate { get; set; }
+        public int Sexe { get; set; }
+        public string PhotoId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Casting> Castings { get; set; }
