@@ -1,0 +1,109 @@
+﻿@helper IconAction(string Action, string Icon, string TooltipMessage, string ToolTipPlacement = "bottom")
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    <a href="@Url.Action(Action)" class="noUnderLine">
+        <img src='@Url.Content(@"~/Content/UI_Images/" + Icon + ".png")'
+             class="Icon" data-toggle="tooltip"
+             data-placement="@ToolTipPlacement"
+             title="@TooltipMessage" />
+    </a>
+}
+
+@helper IconAction(string Action, string controller, string Icon, string TooltipMessage, string ToolTipPlacement = "bottom")
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    <a href="@Url.Action(Action, controller)" class="noUnderLine">
+        <img src='@Url.Content(@"~/Content/UI_Images/" + Icon + ".png")'
+             class="Icon" data-toggle="tooltip"
+             data-placement="@ToolTipPlacement"
+             title="@TooltipMessage" />
+    </a>
+}
+
+@helper FlashButton(string Action, string Icon, string TooltipMessage, string ToolTipPlacement = "bottom")
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    <a href="@Url.Action(Action)" class="noUnderLine">
+        <div class="@Icon flashButton" data-toggle="tooltip"
+             data-placement="@ToolTipPlacement"
+             title="@TooltipMessage"></div>
+    </a>
+}
+
+
+@helper FlashButton(string Action, string Controller, string Icon, string TooltipMessage, string ToolTipPlacement = "bottom")
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    <a href="@Url.Action(Action, Controller)" class="noUnderLine">
+        <div class="@Icon flashButton" data-toggle="tooltip"
+             data-placement="@ToolTipPlacement"
+             title="@TooltipMessage"></div>
+    </a>
+}
+
+@helper SelectionLists(List<MoviesManager.Models.ListItem> selectedItems, List<MoviesManager.Models.ListItem> items)
+{
+    <div class="selectionsGrid">
+        <div>
+            <select id='SelectedItems' name='SelectedItems' size='12' multiple class='form-control'>
+                @foreach (MoviesManager.Models.ListItem si in selectedItems)
+                {
+                    <option value='@si.Id'>@si.Text</option>
+                }
+            </select>
+        </div>
+        <div>
+            <div id="MoveLeft" class="iconLeft flashButton" data-toggle="tooltip" data-placement="top" title="Ajouter"></div>
+            <div id="MoveRight" class="iconRight flashButton" data-toggle="tooltip" data-placement="bottom" title="Retirer"></div>
+        </div>
+        <div>
+            <select id='UnselectedItems' size='12' multiple class='form-control'>
+                @foreach (MoviesManager.Models.ListItem ui in items)
+                {
+                    bool found = false;
+                    foreach(MoviesManager.Models.ListItem si in selectedItems)
+                    {
+                        if (si.Id == ui.Id)
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        <option value='@ui.Id'>@ui.Text</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+}
+
+
+@helper SortAction(string Action, string fieldCaption, string RecordName, string fieldName)
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+
+    var sortIcon = Url.Content("~/Content/UI_Images/Sort.png");
+    var sortAscIcon = Url.Content("~/Content/UI_Images/SortAsc.png");
+    var sortDescIcon = Url.Content("~/Content/UI_Images/SortDesc.png");
+
+    <a href="@Url.Action(Action, new { by = fieldName })" style="float:left">
+        @if ((string)Session[RecordName + "SortBy"] == fieldName)
+        {
+            if ((bool)Session[RecordName + "SortAscendant"])
+            {
+                <img src='@sortAscIcon' data-toggle="tooltip" data-placement="bottom" title="Trier" style="padding-right:4px;" class="Sort_Icon" />
+            }
+            else
+            {
+                <img src='@sortDescIcon' data-toggle="tooltip" data-placement="bottom" title="Trier" style="padding-right:4px;" class="Sort_Icon" />
+            }
+        }
+        else
+        {
+            <img src='@sortIcon' data-toggle="tooltip" data-placement="bottom" title="Trier" style="padding-right:4px;" class="Sort_Icon" />
+        }
+    </a>
+    @(new HtmlString(fieldCaption))
+}

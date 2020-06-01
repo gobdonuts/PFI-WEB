@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Actor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Castings" Relationship="Self.FK_Castings_To_Actors" FromRole="Actors" ToRole="Castings" />
+  </EntityType>
+  <EntityType Name="Casting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Film_Id" Type="Int32" Nullable="false" />
+    <Property Name="Actor_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Actor" Relationship="Self.FK_Castings_To_Actors" FromRole="Castings" ToRole="Actors" />
+    <NavigationProperty Name="Film" Relationship="Self.FK_Castings_To_Films" FromRole="Castings" ToRole="Films" />
+  </EntityType>
+  <EntityType Name="Film">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReleaseYear" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Castings" Relationship="Self.FK_Castings_To_Films" FromRole="Films" ToRole="Castings" />
+  </EntityType>
+  <Association Name="FK_Castings_To_Actors">
+    <End Role="Actors" Type="Self.Actor" Multiplicity="1" />
+    <End Role="Castings" Type="Self.Casting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Castings">
+        <PropertyRef Name="Actor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Castings_To_Films">
+    <End Role="Films" Type="Self.Film" Multiplicity="1" />
+    <End Role="Castings" Type="Self.Casting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Films">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Castings">
+        <PropertyRef Name="Film_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actors" EntityType="Self.Actor" />
+    <EntitySet Name="Castings" EntityType="Self.Casting" />
+    <EntitySet Name="Films" EntityType="Self.Film" />
+    <AssociationSet Name="FK_Castings_To_Actors" Association="Self.FK_Castings_To_Actors">
+      <End Role="Actors" EntitySet="Actors" />
+      <End Role="Castings" EntitySet="Castings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Castings_To_Films" Association="Self.FK_Castings_To_Films">
+      <End Role="Films" EntitySet="Films" />
+      <End Role="Castings" EntitySet="Castings" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

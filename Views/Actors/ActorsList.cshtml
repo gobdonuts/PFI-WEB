@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MoviesManager.Models.ActorView>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        <th></th>
+        @if ((bool)ViewBag.ShowCrudCommand)
+        {
+            <th></th>
+            <th>
+                @Helper.FlashButton("Create", "iconPlus", "Ajouter un acteur", "left")
+            </th>
+        }
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Helper.FlashButton("Details/" + item.Id, "Actors", "iconDetails", "Détails", "left")
+            </td>
+            @if ((bool)ViewBag.ShowCrudCommand)
+            {
+
+                <td>
+                    @Helper.FlashButton("Edit/" + item.Id, "Actors", "iconEdit", "Modifier", "left")
+                </td>
+                <td>
+                    @Helper.FlashButton("Delete/" + item.Id, "Actors", "iconDelete", "Effacer", "left")
+                </td>
+            }
+        </tr>
+    }
+
+</table>

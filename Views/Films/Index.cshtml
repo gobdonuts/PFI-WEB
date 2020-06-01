@@ -1,0 +1,12 @@
+﻿@model IEnumerable<MoviesManager.Models.FilmView>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Répertoire des films</h2>
+
+@{
+    ViewBag.ShowCrudCommand = true;
+    Html.RenderPartial("FilmsList", Model);
+}

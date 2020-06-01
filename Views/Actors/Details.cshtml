@@ -1,0 +1,40 @@
+﻿@model MoviesManager.Models.ActorView
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<table>
+    <tr>
+        <td><h2>@Html.DisplayFor(model => model.Name)</h2></td>
+        <td>&nbsp;</td>
+        <td>@Helper.FlashButton("Edit/" + Model.Id, "Actors", "iconEdit", "Modifier", "left")</td>
+        <td>&nbsp;</td>
+        <td>@Html.ActionLink("Retour", "Index")</td>
+    </tr>
+</table>
+
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+    </dl>
+</div>
+
+<h4>Filmographie</h4>
+@{
+    ViewBag.ShowCrudCommand = false;
+    Html.RenderPartial("~/Views/Films/FilmsList.cshtml", (IEnumerable<MoviesManager.Models.FilmView>)ViewBag.Films);
+}
+
+

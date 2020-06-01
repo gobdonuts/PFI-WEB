@@ -1,0 +1,5 @@
+﻿.selectionsGrid {
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 45% 5% 45%;
+}

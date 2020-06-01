@@ -1,0 +1,276 @@
+.main {
+    float: none;
+    display: block;
+    margin: 0 auto;	
+    width:90%;
+    background-image: linear-gradient(to bottom right,  rgb(0, 187, 194),  rgb(0, 17, 255));
+    padding:20px;
+    color:white;
+    min-width: 550px;
+}
+.headerUsernameCell{
+    font-size: 20px;
+    padding: 10px;
+    text-align: right;
+}
+.section {
+    border-radius:8px;
+    margin:20px;
+    padding:12px;
+    background:white;
+    border:1px solid blue;
+    color:black;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.705);
+}
+body {
+    background:gray;
+}
+.logo {
+    width:90px;
+    margin:10px;
+}
+.preformatted {
+    tab-size: 4;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    text-align: justify;
+    unicode-bidi: embed;
+    overflow-x: hidden;
+    resize: vertical;
+}
+.pdfFrame {
+    width:100%; 
+    height:1200px;
+}
+input {
+    margin-top: 10px;
+}
+.header-layout {
+    margin-left: 20px;
+    display: grid;
+    grid-template-columns:  5% 10% 5% 5% 65% 5% 5%;
+}
+.logo {
+    height: 70px;
+    width: 70px;
+}
+.iconBig {
+    margin-left:20px;
+    margin-top:8px;
+    height: 36px;
+}
+.iconBigger {
+    margin-left:20px;
+    margin-top:8px;
+    height: 46px;
+}
+.footer-layout {
+    display: grid;
+    grid-template-columns:  70% 30%;
+    text-align: right;
+}
+
+.divPhoto {
+    padding-top:2px;
+    padding-left:20px;
+}
+.Photo {
+    width: 100%;
+}
+
+.roundPhoto {
+    height:50px;
+    border-radius: 25px;
+}
+.mediumroundPhoto {
+    height:60px;
+    border-radius: 30px;
+}
+
+.bigRoundPhoto {
+    margin:6px;
+    width:70px;
+    border-radius:35px;
+}
+
+/**/
+.smallActorPhoto {
+    width:40px;
+    margin:5px;
+}
+.ratingListPageLayout{
+    display: grid;    
+    grid-gap: 12px;
+    grid-template-columns: 30% 70%;
+}
+.ratingListLayout{
+    display: grid;    
+    grid-gap: 12px;
+    grid-template-columns: 75px auto;
+}
+.createFormLayout{
+    display: grid;    
+    grid-gap: 12px;
+    grid-template-columns: 25% 30% 43%;
+}
+.deleteLayout{
+    display: grid;    
+    grid-gap: 12px;
+    grid-template-columns: 30% 55%;
+}
+.ActorsHeaderListLayout{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: grid;
+    background:black;
+    grid-template-columns: 15% 30% 20% 20% 5% 10%;
+    padding-right:16px; /* scrollbar width */
+}
+.ActorsListLayout{
+    height:65px;
+    display: grid;
+    grid-template-columns: 15% 30% 20% 20% 5% 5% 5%;
+    border:4px solid ligthgray;
+}
+.MoviesHeaderListLayout{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: grid;
+    background:black;
+    grid-template-columns: 7% 20% 15% 13% 15% 15% 5% 10%;
+    padding-right:16px; /* scrollbar width */
+}
+.MoviesListLayout{
+    height:65px;
+    display: grid;
+    grid-template-columns: 7% 20% 15% 13% 15% 15% 5% 5% 5%;
+    border:4px solid ligthgray;
+}
+.ActorsHeaderListLayoutNOCRUD{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: grid;
+    background:black;
+    grid-template-columns: 15% 35% 25% 20%;
+    padding-right:16px; /* scrollbar width */
+}
+.ActorsListLayoutNOCRUD{
+    height:65px;
+    display: grid;
+    grid-template-columns: 15% 35% 25% 20%;
+    border:4px solid ligthgray;
+}
+.MoviesHeaderListLayoutNOCRUD{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    display: grid;
+    background:black;
+    grid-template-columns: 15% 30% 10% 20% 20%;
+    padding-right:16px; /* scrollbar width */
+}
+.MoviesListLayoutNOCRUD{
+    height:65px;
+    display: grid;
+    grid-template-columns: 15% 30% 10% 20% 20%;
+    border:4px solid ligthgray;
+}
+.headerListItem {
+    color:white;
+    font-weight:700;
+    padding:6px;
+    font-size:20px;
+}
+
+.actorsList{
+    height:700px;
+    overflow-x: hidden;
+    border:1px solid lightgray;
+    text-align: center;
+}
+
+.actorListRowLayout{
+    height: 200px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    border:4px solid ligthgray;
+}
+
+.detailsLayout{
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 30% 35% 30%;   
+}
+
+.photoMedium{
+    height: 200px;
+    padding-bottom: 10px;
+}
+
+.sortedItem {
+    cursor:pointer;
+}
+.unSortedItem {
+    cursor:none;
+}
+.sortIcon {
+    height:19px;
+    margin-top:6px;
+    margin-left:-30px;
+    margin-right:3px;
+    float:left; 
+    cursor:pointer;
+}
+.scrollList{
+    height:500px;
+    overflow-x: hidden;
+    border:1px solid lightgray;
+}
+
+.ActorsListLayout> .flashButton {
+    display:none;
+}
+.ActorsListLayout:hover > .flashButton{
+    display:block;
+}
+.CastSelectorLayout{
+    display: grid;
+    grid-template-columns: 47% 40px 47%;
+    border:4px solid ligthgray;
+}
+select{
+    border:1px solid lightgray;
+    width:99%;
+    margin:2px;
+}
+.MoviesListLayout> .flashButton {
+    display:none;
+}
+.MoviesListLayout:hover > .flashButton{
+    display:block;
+}
+.cellContent{
+    display: table; 
+    height:55px;   
+}
+.innerCellContent {
+    font-weight:500;
+    padding-left:5px;
+    font-size:20px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+div2{
+    border:1px solid red;
+}
+label{
+    margin-top: 12px;
+    margin-bottom:10px;
+}
+.ratingSummary{
+    font-size: 12px;
+}
+textarea {
+    margin-right:6px;
+}
+
