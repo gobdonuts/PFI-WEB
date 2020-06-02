@@ -111,7 +111,6 @@ D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\bin\System.Web.WebPages.Razor.xml
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\bin\Newtonsoft.Json.xml
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\bin\Antlr3.Runtime.pdb
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\obj\Debug\MoviesManager.csprojAssemblyReference.cache
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\obj\Debug\MoviesManager.csproj.CopyComplete
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\obj\Debug\MoviesManager.dll
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\obj\Debug\MoviesManager.pdb

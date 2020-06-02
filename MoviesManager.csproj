@@ -289,7 +289,9 @@
     <Content Include="Views\Users\Profil.cshtml" />
     <Content Include="Views\Admin\UsersList.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Posters\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

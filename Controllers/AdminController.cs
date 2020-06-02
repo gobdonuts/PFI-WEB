@@ -27,6 +27,7 @@ namespace MoviesManager.Controllers
         public ActionResult DeleteUser(string userName)
         {
             User userToDelete = DB.FindByUserName(userName);
+            userToDelete.ToUserView().RemoveAvatar();
             DB.Users.Remove(userToDelete);
             DB.SaveChanges();
             return RedirectToAction("UsersList"); 

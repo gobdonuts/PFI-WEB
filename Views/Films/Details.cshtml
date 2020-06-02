@@ -17,26 +17,23 @@
 </table>
 
 <div>
-    <hr />
-    <dl class="dl-horizontal">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReleaseYear)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReleaseYear)
-        </dd>
-
-    </dl>
+    <div style="width:200px;height:300px"> @Helper.Image(Model.GetPosterURL())</div>
+    <div >
+        <div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.Author) :
+            </span>
+            @Html.DisplayFor(model => model.Author) 
+        </div>
+        <div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.Year) : 
+            </span>
+                @Html.DisplayFor(model => model.Year)
+        </div>
+    </div>
+    
 </div>
 @{
     ViewBag.ShowCrudCommand = false;

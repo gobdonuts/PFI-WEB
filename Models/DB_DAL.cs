@@ -36,7 +36,27 @@ namespace MoviesManager.Models
         public double RatingsAverage { get; set; }
         public int NbRatings { get; set; }
 
+        private ImageGUIDReference PosterReference { get; set; }
+        public string AvatarImageData { get; set; }
 
+        public void InitAvatarManagement()
+        {
+            PosterReference = new ImageGUIDReference(@"/Posters/", @"no_avatar.png");
+            PosterReference.MaxSize = 512;
+            PosterReference.HasThumbnail = false;
+        }
+        public FilmView()
+        {
+            InitAvatarManagement();
+        }
+        public String GetPosterURL()
+        {
+            return PosterReference.GetURL(PosterId, false);
+        }
+        public void SaveAvatar()
+        {
+            PosterId = PosterReference.SaveImage(AvatarImageData, PosterId);
+        }
         public void ToFilm(Film film)
         {
             film.Id = Id;

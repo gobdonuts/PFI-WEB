@@ -154,4 +154,11 @@
          style="background: url(@avatarUrl) no-repeat center center; background-size: cover;"></div>
 
 }
+@helper Image(string imageGUID)
+{
+var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+var imageUrl = Url.Content(imageGUID);
+    <div class="poster"
+         style="background: url(@imageUrl) no-repeat center center; background-size: cover;"></div>
+}
 
