@@ -35,7 +35,12 @@
                         <li>@Html.ActionLink("Films", "Index", "Films")</li>
                         <li>@Html.ActionLink("Acteurs", "Index", "Actors")</li>
                         <li>@Helper.AvatarProfilLink(onlineUser)</li>
+                        if (user.Admin)
+                        {
+                            <li>@Html.ActionLink("Liste d'usagers", "UsersList", "Admin")</li>
+                        }
                         <li>@Html.ActionLink("Déconnexion", "Logout", "Users")</li>
+
                     }
 
                 </ul>

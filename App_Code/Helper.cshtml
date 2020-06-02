@@ -1,4 +1,14 @@
-﻿@helper IconAction(string Action, string Icon, string TooltipMessage, string ToolTipPlacement = "bottom")
+﻿@helper Icon(string Icon, string TooltipMessage, string ToolTipPlacement = "bottom")
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+
+    <img src='@Url.Content(@"~/Content/icons/" + Icon + ".png")'
+         class="Icon" data-toggle="tooltip"
+         data-placement="@ToolTipPlacement"
+         title="@TooltipMessage" />
+
+}
+@helper IconAction(string Action, string Icon, string TooltipMessage, string ToolTipPlacement = "bottom")
 {
     var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
     <a href="@Url.Action(Action)" class="noUnderLine">
@@ -134,5 +144,14 @@
 
         </div>
     </fieldset>
+}
+@helper Avatar(MoviesManager.Models.UserView user)
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    var avatarUrl = Url.Content(user.GetAvatarURL());
+
+    <div class="smallAvatar"
+         style="background: url(@avatarUrl) no-repeat center center; background-size: cover;"></div>
+
 }
 

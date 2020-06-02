@@ -21,10 +21,10 @@
         <tbody>
             @foreach (var item in onlineUsers)
             {
-
+                MoviesManager.Models.UserView user = MoviesManager.Models.Extension.ToUserView(item);
                 <tr>
                     <td>
-                        picture
+                        @Helper.Avatar(user)
                     </td>
                     <td>
                         @item.UserName
@@ -35,7 +35,7 @@
                     </td>
 
                     <td>
-                        Online
+                        @Helper.Icon("OnLine", "Online")
                     </td>
 
                 </tr>
@@ -45,9 +45,10 @@
             {
                 if (!lstUN.Contains(item.UserName))
                 {
+                     MoviesManager.Models.UserView user = MoviesManager.Models.Extension.ToUserView(item);
                     <tr>
                         <td>
-                            picture
+                            @Helper.Avatar(user)
                         </td>
                         <td>
                             @item.UserName
@@ -58,7 +59,7 @@
                         </td>
 
                         <td>
-                            offline
+                            @Helper.Icon("Masked", "Offline")
                         </td>
 
                     </tr>
