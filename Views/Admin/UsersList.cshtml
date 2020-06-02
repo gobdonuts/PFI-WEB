@@ -1,0 +1,73 @@
+﻿@model MoviesManager.Models.User[]
+
+@{
+    ViewBag.Title = "UsersList";
+    List<MoviesManager.Models.User> onlineUsers = MoviesManager.Models.OnlineUsers.ToList();
+}
+@if (Model != null)
+{
+    IEnumerable<MoviesManager.Models.User> users = Model;
+    List<int> lstId = new List<int>();
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td ></td>
+                <td >Nom d'utilisateur</td>
+                <td>Nom complet</td>
+                <td>Status</td>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in onlineUsers)
+            {
+
+                <tr>
+                    <td>
+                        picture
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+
+                    <td>
+                        @item.FullName
+                    </td>
+
+                    <td>
+                        Online
+                    </td>
+
+                </tr>
+                lstId.Add(item.Id);
+            }
+            @foreach (var item in users)
+            {
+                if (lstId.Contains(item.Id))
+                {
+                    <tr>
+                        <td>
+                            picture
+                        </td>
+                        <td>
+                            @item.UserName
+                        </td>
+
+                        <td>
+                            @item.FullName
+                        </td>
+
+                        <td>
+                            offline
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+
+
+
+}

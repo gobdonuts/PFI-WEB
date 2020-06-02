@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    MoviesManager.Models.User user = MoviesManager.Models.OnlineUsers.GetSessionUser();
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,12 +19,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Gestionnaire de films", "Index", "Films", new { area = "" }, new { @class = "navbar-brand" })
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Films", "Index", "Films")</li>
-                    <li>@Html.ActionLink("Acteurs", "Index", "Actors")</li>
+                    @if (user == null)
+                    {
+                        <li>@Html.ActionLink("S'inscrire", "Subscribe", "Users")</li>
+                        <li>@Html.ActionLink("Se connecter", "Login", "Users")</li>
+                    }
+                    @if (user != null)
+                    {
+                        MoviesManager.Models.UserView onlineUser = MoviesManager.Models.Extension.ToUserView(user);
+                        @Html.ActionLink("Gestionnaire de films", "Index", "Films", new { area = "" }, new { @class = "navbar-brand" })
+                        <li>@Html.ActionLink("Films", "Index", "Films")</li>
+                        <li>@Html.ActionLink("Acteurs", "Index", "Actors")</li>
+                        <li>@Helper.AvatarProfilLink(onlineUser)</li>
+                        <li>@Html.ActionLink("Déconnexion", "Logout", "Users")</li>
+                    }
+
                 </ul>
             </div>
         </div>

@@ -130,6 +130,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActorsController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Authorizations.cs" />
     <Compile Include="Controllers\FilmsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -151,6 +153,7 @@
     <Compile Include="Models\Film.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageGUIDReference.cs" />
     <Compile Include="Models\ListItem.cs" />
     <Compile Include="Models\ModelDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -176,6 +179,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>ModelDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +187,8 @@
     <Content Include="App_Data\DB_log.ldf">
       <DependentUpon>DB.mdf</DependentUpon>
     </Content>
+    <Content Include="Avatars\Loading_icon.gif" />
+    <Content Include="Avatars\no_avatar.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -211,6 +217,9 @@
     <Content Include="Content\icons\ICON_Right_Neutral.png" />
     <Content Include="Content\icons\ICON_Right_Over.png" />
     <Content Include="Content\icons\Sort.png" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\RatingBar.css" />
     <Content Include="Content\selections.css" />
     <Content Include="favicon.ico" />
@@ -238,6 +247,7 @@
       <DependentUpon>ModelDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\imageUploader.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -272,10 +282,12 @@
     <Content Include="Views\Actors\Details.cshtml" />
     <Content Include="Views\Films\FilmsList.cshtml" />
     <Content Include="Views\Actors\ActorsList.cshtml" />
+    <Content Include="Views\Users\Subscribe.cshtml" />
+    <Content Include="Views\Users\Login.cshtml" />
+    <Content Include="Views\Users\Profil.cshtml" />
+    <Content Include="Views\Admin\UsersList.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Users\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

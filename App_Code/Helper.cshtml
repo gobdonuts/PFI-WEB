@@ -61,7 +61,7 @@
                 @foreach (MoviesManager.Models.ListItem ui in items)
                 {
                     bool found = false;
-                    foreach(MoviesManager.Models.ListItem si in selectedItems)
+                    foreach (MoviesManager.Models.ListItem si in selectedItems)
                     {
                         if (si.Id == ui.Id)
                         {
@@ -107,3 +107,32 @@
     </a>
     @(new HtmlString(fieldCaption))
 }
+@helper AvatarProfilLink(MoviesManager.Models.UserView user)
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    var avatarUrl = Url.Content(user.GetAvatarURL());
+    var linkUrl = Url.Action("Profil", "Users");
+
+    <a href="@linkUrl" data-toggle="tooltip" title="Modifier le profil">
+        <div class="smallAvatar"
+             style="background: url(@avatarUrl) no-repeat center center; background-size: cover;"></div>
+        <span class="menuTile">&nbsp;@user.FullName</span>
+    </a>
+}
+
+@helper ImageUploader(int id, string imageSrc, string controlId = "ImageControl", string waitingImage = "", string TooltipMessage = "", string ToolTipPlacement = "bottom")
+{
+    var Url = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+    imageSrc = Url.Content(imageSrc);
+    controlId = Url.Content(controlId);
+    waitingImage = Url.Content(waitingImage);
+    <fieldset>
+        <div class='imageUploader' style="width:200px;height:200px" id='@id' controlId='@controlId' imageSrc='@imageSrc' waitingImage='@waitingImage'
+             data-toggle="tooltip"
+             data-placement="@ToolTipPlacement"
+             title="@TooltipMessage">
+
+        </div>
+    </fieldset>
+}
+

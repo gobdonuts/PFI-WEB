@@ -14,6 +14,9 @@ namespace MoviesManager
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/imageUploader").Include(
+                       "~/Scripts/imageUploader.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/selections").Include(
                         "~/Scripts/selections.js"));
 
@@ -29,7 +32,10 @@ namespace MoviesManager
                       "~/Content/bootstrap.css",
                       "~/Content/flashButtons.css",
                       "~/Content/selections.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                       "~/Content/jquery-ui.css",
+                      "~/Content/jquery-ui.structure.css",
+                      "~/Content/jquery-ui.theme.css"));
         }
     }
 }

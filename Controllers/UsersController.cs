@@ -1,9 +1,9 @@
-﻿using MoviesManager.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MoviesManager.Models;
 
 namespace MoviesManager.Controllers
 {
@@ -11,15 +11,9 @@ namespace MoviesManager.Controllers
     {
         private DBEntities DB = new DBEntities();
 
-        protected override void Dispose(bool disposing)
-        {
-            DB.Dispose();
-            base.Dispose(disposing);
-        }
-        //Creer la vue sbscribe
         public ActionResult Subscribe()
         {
-            return View();
+            return View(new UserView());
         }
         [HttpPost]
         public ActionResult Subscribe(UserView userView)
@@ -38,34 +32,15 @@ namespace MoviesManager.Controllers
             }
             return View(userView);
         }
-        public DateTime LastOnlineUsersUpdate
-        {
-            get
-            {
-                if (Session["LastOnlineUsersUpdate"] == null)
-                    Session["LastOnlineUsersUpdate"] = new DateTime(0);
-                return (DateTime)Session["LastOnlineUsersUpdate"];
-            }
-            set
-            {
-                Session["LastOnlineUsersUpdate"] = value;
-            }
-        }
-        public ActionResult Index()
-        {
-            User currentUser = OnlineUsers.GetSessionUser();
-            ViewBag.currentUser = currentUser;
-            return View();
-        }
         public ActionResult Login()
         {
-            return View();
+            return View(new LoginView());
         }
         [HttpPost]
         public ActionResult Login(LoginView loginView)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 User userFound = DB.FindByUserName(loginView.UserName);
                 if (userFound != null)
                 {
@@ -81,23 +56,8 @@ namespace MoviesManager.Controllers
                     return View(loginView);
                 }
                 OnlineUsers.AddSessionUser(userFound);
-            }
-            return RedirectToAction("Index");
-        }
-        public ActionResult Logout()
-        {
-            User currentUser = OnlineUsers.GetSessionUser();
-            if (currentUser != null)
-            {
-                ReversiGame game = Games.Find(currentUser.Id);
-                OnlineUsers.RemoveSessionUser();
-
-                if (game != null)
-                {
-                    game.PlayersStillOnLine();
-                }
-            }
-            return RedirectToAction("Login");
+            //}
+            return RedirectToAction("Profil");
         }
         [UserAcces]
         public ActionResult Profil()
@@ -112,10 +72,29 @@ namespace MoviesManager.Controllers
             if (ModelState.IsValid)
             {
 
-                
+                string PasswordChangeToken = (string)Request["PasswordChangeToken"];
+                User user = DB.FindByUserName(OnlineUsers.Find(userView.Id).UserName);
+                if (userView.NewPassword.Equals(PasswordChangeToken))
+                {
+                    userView.Password = user.Password;
+                }
+                else
+                {
+                    userView.Password = userView.NewPassword;
+                }
+                DB.UpdateUser(userView);
+                userView.CopyToUser(OnlineUsers.GetSessionUser());
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Profil");
         }
-       
+        public ActionResult Logout()
+        {
+            User currentUser = OnlineUsers.GetSessionUser();
+            if (currentUser != null)
+            {
+                OnlineUsers.RemoveSessionUser();
+            }
+            return RedirectToAction("Login");
+        }
     }
 }

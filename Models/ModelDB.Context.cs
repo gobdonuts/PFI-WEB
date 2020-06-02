@@ -33,5 +33,7 @@ namespace MoviesManager.Models
         public virtual DbSet<Rating> Ratings { get; set; }
         public virtual DbSet<Style> Styles { get; set; }
         public virtual DbSet<User> Users { get; set; }
+
+        public System.Data.Entity.DbSet<MoviesManager.Models.UserView> UserViews { get; set; }
     }
 }
