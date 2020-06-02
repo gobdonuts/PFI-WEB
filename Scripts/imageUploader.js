@@ -94,7 +94,7 @@ function ImageUploader_AttachEvent(controlId) {
             document.querySelector('#' + controlId + '_ImageUploader').click();
         });
     document.querySelector('#' + controlId + '_ImageUploader').
-        addEventListener('change', preLoadImage );
+        addEventListener('change', preLoadImage);
 }
 
 

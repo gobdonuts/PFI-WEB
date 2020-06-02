@@ -7,7 +7,7 @@
 @if (Model != null)
 {
     IEnumerable<MoviesManager.Models.User> users = Model;
-    List<int> lstId = new List<int>();
+    List<string> lstUN = new List<string>();
     <table class="table table-hover">
         <thead>
             <tr>
@@ -39,11 +39,11 @@
                     </td>
 
                 </tr>
-                lstId.Add(item.Id);
+                lstUN.Add(item.UserName);
             }
             @foreach (var item in users)
             {
-                if (lstId.Contains(item.Id))
+                if (!lstUN.Contains(item.UserName))
                 {
                     <tr>
                         <td>

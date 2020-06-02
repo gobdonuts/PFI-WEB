@@ -115,7 +115,7 @@
 
     <a href="@linkUrl" data-toggle="tooltip" title="Modifier le profil">
         <div class="smallAvatar"
-             style="background: url(@avatarUrl) no-repeat center center; background-size: cover;"></div>
+             style="background: Url(@avatarUrl) no-repeat center center; background-size: cover;"></div>
         <span class="menuTile">&nbsp;@user.FullName</span>
     </a>
 }
@@ -127,7 +127,7 @@
     controlId = Url.Content(controlId);
     waitingImage = Url.Content(waitingImage);
     <fieldset>
-        <div class='imageUploader' style="width:200px;height:200px" id='@id' controlId='@controlId' imageSrc='@imageSrc' waitingImage='@waitingImage'
+        <div class='imageUploader' style="display:inline-block" id='@id' controlId='@controlId' imageSrc='@imageSrc' waitingImage='@waitingImage'
              data-toggle="tooltip"
              data-placement="@ToolTipPlacement"
              title="@TooltipMessage">
