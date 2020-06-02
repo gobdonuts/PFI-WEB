@@ -145,6 +145,7 @@ namespace MoviesManager.Models
         public static bool RemoveUser(this DBEntities DB, UserView userView)
         {
             User userToDelete = userView.ToUser();
+ 
             DB.Users.Remove(userToDelete);
             DB.SaveChanges();
             return true;

@@ -23,5 +23,13 @@ namespace MoviesManager.Controllers
             }
             return null;
         }
+        [AdminAcces]
+        public ActionResult DeleteUser(string userName)
+        {
+            User userToDelete = DB.FindByUserName(userName);
+            DB.Users.Remove(userToDelete);
+            DB.SaveChanges();
+            return RedirectToAction("UsersList"); 
+        }
     }
 }
