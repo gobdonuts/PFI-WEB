@@ -216,6 +216,8 @@
     <Content Include="Content\icons\ICON_Right_Disable.png" />
     <Content Include="Content\icons\ICON_Right_Neutral.png" />
     <Content Include="Content\icons\ICON_Right_Over.png" />
+    <Content Include="Content\icons\Masked.png" />
+    <Content Include="Content\icons\OnLine.png" />
     <Content Include="Content\icons\Sort.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery-ui.structure.css" />
