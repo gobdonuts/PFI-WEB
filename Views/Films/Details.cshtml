@@ -42,11 +42,27 @@
             </span>
             @Html.DisplayFor(model => model.Year)
         </div>
+        <div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.AudienceId) :
+            </span>
+            @Html.DisplayFor(model => model.AudienceId)
+        </div>
+        <div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.RatingsAverage) :
+            </span>
+            @ViewBag.Avg
+        </div>
     </div>
 
 </div>
+
 @{
     ViewBag.ShowCrudCommand = false;
     Html.RenderPartial("~/Views/Actors/ActorsList.cshtml", (IEnumerable<MoviesManager.Models.ActorView>)ViewBag.Actors);
 }
-
+@{
+    ViewBag.ShowCrudCommand = false;
+    Html.RenderPartial("~/Views/Films/RatingsList.cshtml", (IEnumerable<MoviesManager.Models.RatingView>)ViewBag.Ratings);
+}

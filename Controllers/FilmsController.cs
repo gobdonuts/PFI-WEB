@@ -15,7 +15,10 @@ namespace MoviesManager.Controllers
         {
             return View(DB.FilmsList());
         }
-
+        public ActionResult RatingsList(List<RatingView> ratings)
+        {
+            return PartialView(ratings);
+        }
         public ActionResult FilmsList(List<FilmView> films)
         {
             return PartialView(films);
@@ -37,7 +40,16 @@ namespace MoviesManager.Controllers
         public ActionResult Details(int id)
         {
             Film film = DB.Films.Find(id);
+            List<Rating> ratings = DB.Ratings.Where(r => r.FilmId == id).ToList();
             ViewBag.Actors = film.ActorsList();
+            var avgRating = 0;
+            foreach(Rating  r in ratings)
+            {
+                avgRating += r.Value;
+            }
+            avgRating = avgRating / ratings.Count;
+            ViewBag.Ratings = ratings.ToRatingViewList();
+            ViewBag.Avg = avgRating;
             return View(film.ToFilmView());
         }
         [AdminAcces]

@@ -71,8 +71,30 @@ namespace MoviesManager.Models
             film.NbRatings = NbRatings;
         }
     }
-    
-   
+
+    public class RatingView
+    {
+        public int Id { get; set; }
+
+       
+        public int FilmId { get; set; }
+
+        public int UserId { get; set; }
+        [Display(Name = "Valeur")]
+        public int Value { get; set; }
+        [Display(Name = "Commentaire")]
+        public string Comment { get; set; }
+        
+        public void toRating(Rating rating)
+        {
+            rating.Id = Id;
+            rating.FilmId = FilmId;
+            rating.UserId = UserId;
+            rating.Value = Value;
+            rating.Comment = Comment;
+        }
+    }
+
     public class ActorView
     {
         public int Id { get; set; }
@@ -279,6 +301,17 @@ namespace MoviesManager.Models
                 Castings = actor.Castings
             };
         }
+        public static RatingView ToRatingView(this Rating rating)
+        {
+            return new RatingView()
+            {
+                Id = rating.Id,
+                FilmId = rating.FilmId,
+                UserId = rating.UserId,
+                Value = rating.Value,
+                Comment = rating.Comment
+            };
+        }
         public static List<FilmView> FilmsList(this Actor actor)
         {
             List<FilmView> films = new List<FilmView>();
@@ -315,6 +348,20 @@ namespace MoviesManager.Models
             }
             return actors.OrderBy(f => f.Name).ToList();
         }
+        
+        public static List<RatingView> ToRatingViewList(this List<Rating> ratings)
+        {
+            List<RatingView> ratingsView = new List<RatingView>();
+            if (ratings != null)
+            {
+                foreach (Rating rating in ratings)
+                {
+                    ratingsView.Add(rating.ToRatingView());
+                }
+            }
+            return ratingsView;
+        }
+        
         public static List<ActorView> ActorsList(this DBEntities DB)
         {
             List<ActorView> actors = new List<ActorView>();

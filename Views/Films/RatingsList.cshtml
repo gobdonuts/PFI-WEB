@@ -1,0 +1,30 @@
+﻿@model IEnumerable<MoviesManager.Models.RatingView>
+    <h1>Reviews</h1>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+   
+    <td>
+        @Html.DisplayFor(modelItem => item.Value)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Comment)
+    </td>
+
+</tr>
+    }
+
+</table>
