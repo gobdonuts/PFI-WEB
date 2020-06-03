@@ -22,23 +22,26 @@
             @foreach (var item in onlineUsers)
             {
                 MoviesManager.Models.UserView user = MoviesManager.Models.Extension.ToUserView(item);
-                <tr>
-                    <td>
-                        @Helper.Avatar(user)
-                    </td>
-                    <td>
-                        @item.UserName
-                    </td>
+            <tr>
+                <td>
+                    @Helper.Avatar(user)
+                </td>
+                <td>
+                    @item.UserName
+                </td>
 
-                    <td>
-                        @item.FullName
-                    </td>
+                <td>
+                    @item.FullName
+                </td>
 
-                    <td>
-                        @Helper.Icon("OnLine", "Online")
-                    </td>
+                <td>
+                    @Helper.Icon("OnLine", "Online")
+                </td>
 
-                </tr>
+                <td>
+                    @Html.ActionLink("Supprimer","DeleteUser", "Admin", new{userName = item.UserName},null)
+                </td>
+            </tr>
                 lstUN.Add(item.UserName);
             }
             @foreach (var item in users)
@@ -61,7 +64,9 @@
                         <td>
                             @Helper.Icon("Masked", "Offline")
                         </td>
-
+                        <td>
+                            @Html.ActionLink("Supprimer", "DeleteUser", "Admin", new { userName = item.UserName }, null)
+                        </td>
                     </tr>
                 }
             }
