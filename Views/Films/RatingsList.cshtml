@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<MoviesManager.Models.RatingView>
-    <h1>Reviews</h1>
+<h1>Reviews</h1>
+@{var idFilm = Model.ToArray()[0].FilmId;}
+@Helper.FlashButton("Add/" + idFilm, "Films", "iconPlus", "Ajouter une critique", "left")
 <table class="table">
     <tr>
         <th>
@@ -9,22 +11,21 @@
             @Html.DisplayNameFor(model => model.Comment)
         </th>
 
-
     </tr>
 
     @foreach (var item in Model)
     {
-<tr>
+        <tr>
 
-   
-    <td>
-        @Html.DisplayFor(modelItem => item.Value)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Comment)
-    </td>
 
-</tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+
+        </tr>
     }
 
 </table>

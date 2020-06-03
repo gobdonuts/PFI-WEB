@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using MoviesManager.Models;
 using System.Web.Mvc;
+using System.ComponentModel;
 
 namespace MoviesManager.Models
 {
@@ -81,11 +82,26 @@ namespace MoviesManager.Models
         public int FilmId { get; set; }
 
         public int UserId { get; set; }
-        [Display(Name = "Valeur")]
-        public int Value { get; set; }
-        [Display(Name = "Commentaire")]
-        public string Comment { get; set; }
+
         
+        [Display(Name = "Note")]
+        [Required(ErrorMessage = "La note doit etre entre 1 et 5")]
+        [Range(1,5)]
+        public int Value { get; set; }
+
+        [Display(Name = "Commentaire")]
+        [Required(ErrorMessage = "Requis")]
+        public string Comment { get; set; }
+
+        public RatingView()
+        {
+
+        }
+        public RatingView(int idFilm,int userId)
+        {
+            UserId = userId;
+            FilmId = idFilm;
+        }
         public void toRating(Rating rating)
         {
             rating.Id = Id;
@@ -453,6 +469,16 @@ namespace MoviesManager.Models
             SetFilmCastings(DB, film.Id, actorsIdList);
             Commit();
             return film.ToFilmView();
+        }
+        public static RatingView AddRating(this DBEntities DB, RatingView ratingView)
+        {
+            Rating rating = new Rating();
+            ratingView.toRating(rating);
+            BeginTransaction(DB);
+            rating = DB.Ratings.Add(rating);
+            DB.SaveChanges();
+            Commit();
+            return rating.ToRatingView();
         }
         public static bool UpdateFilm(this DBEntities DB, FilmView filmView, List<int> actorsIdList)
         {

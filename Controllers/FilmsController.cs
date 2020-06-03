@@ -81,5 +81,31 @@ namespace MoviesManager.Controllers
             DB.RemoveFilm(filmView);
             return RedirectToAction("Index");
         }
+        [UserAcces]
+        public ActionResult Add(int id)
+        {
+            int userId = OnlineUsers.GetSessionUser().Id;
+            return View(new RatingView(id,userId));
+        }
+        [HttpPost]
+        public ActionResult Add(RatingView ratingView)
+        {
+            if (ModelState.IsValid)
+            {
+                if (ratingView.Comment == null || ratingView.Comment.Trim() == "")
+                {
+                    ModelState.AddModelError("Comment", "Ce champ est requis");
+                    return View(ratingView);
+                }
+                if(ratingView.Value == 0)
+                {
+                    ModelState.AddModelError("Value", "0 n'est pas une note valide");
+                }
+                DB.AddRating(ratingView);
+                return RedirectToAction("Index");
+            }
+            return View(ratingView);
+         
+        }
     }
 }
