@@ -8,6 +8,7 @@ using System.Data.Entity.Infrastructure.Interception;
 using System.Linq;
 using System.Web;
 using MoviesManager.Models;
+using System.Web.Mvc;
 
 namespace MoviesManager.Models
 {
@@ -386,6 +387,25 @@ namespace MoviesManager.Models
                 }
             }
             return films;
+        }
+        public static List<ListItem> AudienceListItems(this DBEntities DB)
+        {
+            List<ListItem> audiences = new List<ListItem>();
+            if (DB.Audiences != null)
+            {
+                foreach (Audience audience in DB.Audiences)
+                {
+                    audiences.Add(new ListItem() { Id = audience.Id, Text = audience.Name });
+                }
+            }
+            return audiences;
+        }
+
+        public static List<ListItem> AudienceListItem(this Film film)
+        {
+            List<ListItem> audiences = new List<ListItem>();
+            audiences.Add(new ListItem() { Id = film.AudienceId });
+            return audiences;
         }
         public static List<ListItem> FilmListItems(this DBEntities DB)
         {

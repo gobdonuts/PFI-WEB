@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace MoviesManager.Controllers
 {
@@ -26,9 +27,11 @@ namespace MoviesManager.Controllers
         [AdminAcces]
         public ActionResult Create()
         {
-            ViewBag.SelectedActors = new List<ListItem>();
-            ViewBag.Actors = DB.ActorListItems();
-            return View();
+            ViewBag.SelectedActors = new List<MoviesManager.Models.ListItem>();
+            ViewBag.Actors = new SelectList(DB.ActorListItems());
+            ViewBag.Audiences = new SelectList(DB.Audiences);
+            ViewBag.Styles = new SelectList(DB.Styles);
+            return View(new FilmView());
         }
         [HttpPost]
         public ActionResult Create(FilmView filmView, List<int> SelectedItems /*Liste des Id des acteurs sélectionés*/)
