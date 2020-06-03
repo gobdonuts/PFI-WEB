@@ -114,3 +114,4 @@ D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\bin\Microsoft.CodeDom.Providers.DotNetCompile
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\obj\Debug\MoviesManager.csproj.CopyComplete
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\obj\Debug\MoviesManager.dll
 D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\obj\Debug\MoviesManager.pdb
+D:\ASP\PFI_PP_BF\PFI-Web_2\PFI-WEB\obj\Debug\MoviesManager.csprojAssemblyReference.cache

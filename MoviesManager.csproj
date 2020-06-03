@@ -290,6 +290,7 @@
     <Content Include="Views\Admin\UsersList.cshtml" />
     <Content Include="Views\Films\RatingsList.cshtml" />
     <Content Include="Views\Films\Add.cshtml" />
+    <Content Include="Views\Films\EditComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Posters\" />

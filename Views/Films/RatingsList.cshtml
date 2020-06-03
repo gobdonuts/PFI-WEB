@@ -10,22 +10,54 @@
         <th>
             @Html.DisplayNameFor(model => model.Comment)
         </th>
-
+        <th>
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+<tr>
 
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Value)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Comment)
-            </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Value)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Comment)
+    </td>
+    @if (MoviesManager.Models.OnlineUsers.GetSessionUser().Id == item.UserId)
+    {
+        <td style="vertical-align:middle">
+            @Helper.FlashButton("EditComment/" + item.Id, "Films", "iconEdit", "Modifier", "left")
+        </td>
+        <td style="vertical-align:middle">
+            @Helper.FlashButton("DeleteComment/" + item.Id, "Films", "iconDelete", "Effacer", "left")
+        </td>
+    }
+    else
+    {
+        <td>
 
-        </tr>
+        </td>
+    }
+    @if (MoviesManager.Models.OnlineUsers.GetSessionUser().Admin && MoviesManager.Models.OnlineUsers.GetSessionUser().Id != item.UserId)
+    {
+        <td style="vertical-align:middle">
+            @Helper.FlashButton("DeleteComment/" + item.Id, "Films", "iconDelete", "Effacer", "left")
+        </td>
+    }
+    else
+    {
+        <td></td>
+    }
+
+
+
+</tr>
     }
 
 </table>

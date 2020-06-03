@@ -209,7 +209,7 @@ namespace MoviesManager.Models
         }
         public static void AddSessionUser(User user)
         {
-            user.Id = IdProvider;
+          //  user.Id = IdProvider;
             LastUpdate = DateTime.Now;
             Users.Add(user);
             HttpContext.Current.Session["User"] = user;
@@ -481,6 +481,17 @@ namespace MoviesManager.Models
             Commit();
             return rating.ToRatingView();
         }
+        public static bool UpdateRating(this DBEntities DB, RatingView ratingView)
+        {
+            Rating rating = DB.Ratings.Find(ratingView.Id);
+            ratingView.toRating(rating);
+            BeginTransaction(DB);
+            DB.Entry(rating).State = EntityState.Modified;
+            DB.SaveChanges();
+            DB.SaveChanges();
+            Commit();
+            return true;
+        }
         public static bool UpdateFilm(this DBEntities DB, FilmView filmView, List<int> actorsIdList)
         {
             Film film = DB.Films.Find(filmView.Id);
@@ -498,6 +509,15 @@ namespace MoviesManager.Models
             BeginTransaction(DB);
             SetFilmCastings(DB, film.Id, null);
             DB.Films.Remove(film);
+            DB.SaveChanges();
+            Commit();
+            return true;
+        }
+        public static bool RemoveRating(this DBEntities DB, RatingView ratingView)
+        {
+            Rating rating = DB.Ratings.Find(ratingView.Id);
+            BeginTransaction(DB);
+            DB.Ratings.Remove(rating);
             DB.SaveChanges();
             Commit();
             return true;
