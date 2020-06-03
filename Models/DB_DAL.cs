@@ -445,11 +445,12 @@ namespace MoviesManager.Models
         }
         public static FilmView AddFilm(this DBEntities DB, FilmView filmView, List<int> actorsIdList)
         {
+            filmView.SaveAvatar();
             Film film = new Film();
             filmView.ToFilm(film);
             BeginTransaction(DB);
-            film = DB.Films.Add(film);
             DB.SaveChanges();
+            film = DB.Films.Add(film);
             SetFilmCastings(DB, film.Id, actorsIdList);
             Commit();
             return film.ToFilmView();

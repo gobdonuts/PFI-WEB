@@ -28,7 +28,7 @@ namespace MoviesManager.Controllers
         public ActionResult Create()
         {
             ViewBag.SelectedActors = new List<MoviesManager.Models.ListItem>();
-            ViewBag.Actors = new SelectList(DB.ActorListItems());
+            ViewBag.Actors = DB.ActorListItems();
             ViewBag.Audiences = new SelectList(DB.Audiences);
             ViewBag.Styles = new SelectList(DB.Styles);
             return View(new FilmView());
@@ -50,7 +50,10 @@ namespace MoviesManager.Controllers
             {
                 avgRating += r.Value;
             }
-            avgRating = avgRating / ratings.Count;
+            if(avgRating != 0)
+            {
+                avgRating = avgRating / ratings.Count;
+            }
             ViewBag.Ratings = ratings.ToRatingViewList();
             ViewBag.Avg = avgRating;
             return View(film.ToFilmView());
