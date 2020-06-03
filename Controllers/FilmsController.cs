@@ -51,6 +51,7 @@ namespace MoviesManager.Controllers
         [HttpPost]
         public ActionResult Edit(FilmView filmView, List<int> SelectedItems /*Liste des Id des acteurs sélectionés*/)
         {
+            filmView.SaveAvatar();
             DB.UpdateFilm(filmView, SelectedItems);
             return RedirectToAction("Index");
         }

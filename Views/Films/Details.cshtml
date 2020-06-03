@@ -18,22 +18,29 @@
 
 <div>
 
-    <div style="width:200px;height:300px"> @Helper.Image(Model.GetPosterURL())</div>
-    <div >
+    <div style="width:200px;height:300px">
+        @Helper.Image(Model.GetPosterURL())
+
+    </div>
+    <span style="font-weight:900">
+        @Html.DisplayNameFor(model => model.Synopsis) :
+    </span>
+    @Html.DisplayFor(model => model.Synopsis)
+    <div>
         <div>
             <span style="font-weight:900">
                 @Html.DisplayNameFor(model => model.Author) :
             </span>
-            @Html.DisplayFor(model => model.Author) 
+            @Html.DisplayFor(model => model.Author)
         </div>
         <div>
             <span style="font-weight:900">
-                @Html.DisplayNameFor(model => model.Year) : 
+                @Html.DisplayNameFor(model => model.Year) :
             </span>
-                @Html.DisplayFor(model => model.Year)
+            @Html.DisplayFor(model => model.Year)
         </div>
     </div>
-    
+
 </div>
 @{
     ViewBag.ShowCrudCommand = false;

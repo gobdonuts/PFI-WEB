@@ -72,7 +72,7 @@ $(document).ready(() => {
         let controlId = $(this).attr('controlId');
         let waitingImage = $(this).attr('waitingImage');
         let createMode = parseInt(id) === 0;
-
+        
         let defaultImage = $(this).attr('imageSrc');
         $(this).append('<img style="width:200px; height:200px;" id="' + controlId + '_UploadedImage" name="' + controlId + '_UploadedImage" class="UploadedImage" src="' + defaultImage + '" waitingImage ="' + waitingImage + '">');
 
