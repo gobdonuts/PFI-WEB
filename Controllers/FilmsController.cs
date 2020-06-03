@@ -26,8 +26,8 @@ namespace MoviesManager.Controllers
         {
             ViewBag.SelectedActors = new List<MoviesManager.Models.ListItem>();
             ViewBag.Actors = new SelectList(DB.ActorListItems());
-            ViewBag.SelectedAudiences = new List<MoviesManager.Models.ListItem>();
-            ViewBag.Audiences = new SelectList(DB.AudienceListItems());
+            ViewBag.Audiences = new SelectList(DB.Audiences);
+            ViewBag.Styles = new SelectList(DB.Styles);
             return View(new FilmView());
         }
         [HttpPost]

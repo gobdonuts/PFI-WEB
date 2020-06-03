@@ -21,7 +21,7 @@ namespace MoviesManager.Models
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Requis")]
-        [Display(Name = "Titre")]
+        [Display(Name = "Synopsis")]
         public string Synopsis { get; set; }
 
         [Required(ErrorMessage = "Requis")]
@@ -38,7 +38,7 @@ namespace MoviesManager.Models
         public int NbRatings { get; set; }
 
         private ImageGUIDReference PosterReference { get; set; }
-        public string AvatarImageData { get; set; }
+        public string PosterImageData { get; set; }
 
         public void InitAvatarManagement()
         {
@@ -56,7 +56,7 @@ namespace MoviesManager.Models
         }
         public void SaveAvatar()
         {
-            PosterId = PosterReference.SaveImage(AvatarImageData, PosterId);
+            PosterId = PosterReference.SaveImage(PosterImageData, PosterId);
         }
         public void ToFilm(Film film)
         {
