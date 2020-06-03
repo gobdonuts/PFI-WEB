@@ -97,12 +97,12 @@ namespace MoviesManager.Controllers
             {
                 if (ratingView.Comment == null || ratingView.Comment.Trim() == "")
                 {
-                    ModelState.AddModelError("Comment", "Ce champ est requis");
+                    ModelState.AddModelError("Comment", "");
                     return View(ratingView);
                 }
                 if(ratingView.Value == 0)
                 {
-                    ModelState.AddModelError("Value", "0 n'est pas une note valide");
+                    ModelState.AddModelError("Value", "");
                 }
                 DB.AddRating(ratingView);
                 return RedirectToAction("Index");
