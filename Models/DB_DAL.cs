@@ -81,15 +81,54 @@ namespace MoviesManager.Models
         [Display(Name = "Nom")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Requis")]
+        [Display(Name = "Sexe")]
+        public int Sexe { get; set; }
+
+        [Required(ErrorMessage = "Requis")]
+        [Display(Name = "Pays")]
+        public int CountryId { get; set; }
+
         [Display(Name = "Date de naissance")]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
+        public string PhotoId { get; set; }
 
+        public ICollection<Casting> Castings { get; set; }
+
+        private ImageGUIDReference AvatarReference { get; set; }
+        public string AvatarImageData { get; set; }
+
+        public void InitAvatarManagement()
+        {
+            AvatarReference = new ImageGUIDReference(@"/Avatars/", @"no_avatar.png");
+            AvatarReference.MaxSize = 512;
+            AvatarReference.HasThumbnail = false;
+        }
+        public ActorView()
+        {
+            InitAvatarManagement();
+        }
+        public String GetAvatarUrl()
+        {
+            return AvatarReference.GetURL(PhotoId, false);
+        }
+        public void SaveAvatar()
+        {
+            PhotoId = AvatarReference.SaveImage(AvatarImageData, PhotoId);
+        }
+        public void RemoveAvatar()
+        {
+            AvatarReference.Remove(PhotoId);
+        }
         public void ToActor(Actor actor)
         {
             actor.Id = Id;
             actor.Name = Name;
+            actor.CountryId = CountryId;
             actor.BirthDate = BirthDate;
+            actor.Sexe = Sexe;
+            actor.PhotoId = PhotoId;
         }
     }
     public static class OnlineUsers
@@ -233,7 +272,11 @@ namespace MoviesManager.Models
             {
                 Id = actor.Id,
                 Name = actor.Name,
-                BirthDate = actor.BirthDate
+                BirthDate = actor.BirthDate,
+                PhotoId = actor.PhotoId,
+                Sexe = actor.Sexe,
+                CountryId = actor.CountryId,
+                Castings = actor.Castings
             };
         }
         public static List<FilmView> FilmsList(this Actor actor)
@@ -333,7 +376,6 @@ namespace MoviesManager.Models
             }
             return actors;
         }
-
         public static FilmView AddFilm(this DBEntities DB, FilmView filmView, List<int> actorsIdList)
         {
             Film film = new Film();
@@ -382,7 +424,8 @@ namespace MoviesManager.Models
         }
 
         public static ActorView AddActor(this DBEntities DB, ActorView actorView, List<int> filmsIdList)
-        {
+        { 
+            actorView.SaveAvatar();
             Actor actor = new Actor();
             actorView.ToActor(actor);
             BeginTransaction(DB);
@@ -394,6 +437,7 @@ namespace MoviesManager.Models
         }
         public static bool UpdateActor(this DBEntities DB, ActorView actorView, List<int> filmsIdList)
         {
+            actorView.SaveAvatar();
             Actor actor = DB.Actors.Find(actorView.Id);
             actorView.ToActor(actor);
             BeginTransaction(DB);
@@ -405,6 +449,7 @@ namespace MoviesManager.Models
         }
         public static bool RemoveActor(this DBEntities DB, ActorView actorView)
         {
+            actorView.RemoveAvatar();
             Actor actor = DB.Actors.Find(actorView.Id);
             BeginTransaction(DB);
             SetActorCastings(DB, actor.Id, null);

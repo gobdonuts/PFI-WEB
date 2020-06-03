@@ -7,32 +7,51 @@
 <h2>Retrait d'acteur</h2>
 
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    <h2></h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <table>
+        <tr>
+            <td><h2>@Html.DisplayFor(model => model.Name)</h2></td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </dt>
+    <div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BirthDate)
-        </dd>
 
-    </dl>
+        <div style="width:200px;height:200px">
+            @Helper.Image(Model.GetAvatarUrl())
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Effacer" class="btn btn-default" /> |
-            @Html.ActionLink("Retour", "Index")
         </div>
-    }
+        <div>
+            <div>
+                <span style="font-weight:900">
+                    @Html.DisplayNameFor(model => model.BirthDate) :
+                </span>
+                @Html.DisplayFor(model => model.BirthDate)
+            </div>
+            <div>
+                <span style="font-weight:900">
+                    @Html.DisplayNameFor(model => model.CountryId) :
+                </span>
+                @Html.DisplayFor(model => model.CountryId)
+            </div>
+            <div>
+                <span style="font-weight:900">
+                    @Html.DisplayNameFor(model => model.Sexe) :
+                </span>
+                @Html.DisplayFor(model => model.Sexe)
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Effacer" class="btn btn-default" /> |
+                @Html.ActionLink("Retour", "Index")
+            </div>
+        }
+    </div>
 </div>

@@ -8,8 +8,11 @@
     <tr>
         <td><h2>@Html.DisplayFor(model => model.Name)</h2></td>
         <td>&nbsp;</td>
-        <td>@Helper.FlashButton("Edit/" + Model.Id, "Actors", "iconEdit", "Modifier", "left")</td>
-        <td>&nbsp;</td>
+        @if (MoviesManager.Models.OnlineUsers.GetSessionUser() != null && MoviesManager.Models.OnlineUsers.GetSessionUser().Admin)
+        {
+            <td>@Helper.FlashButton("Edit/" + Model.Id, "Actors", "iconEdit", "Modifier", "left")</td>
+            <td>&nbsp;</td>
+        }
         <td>@Html.ActionLink("Retour", "Index")</td>
     </tr>
 </table>
@@ -17,18 +20,39 @@
 
 
 <div>
-    <hr />
-    <dl class="dl-horizontal">
+    @Html.HiddenFor(model => model.Id)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </dt>
+    <div style="width:200px;height:200px">
+        @Helper.Image(Model.GetAvatarUrl())
 
-        <dd>
+    </div>
+    <div>
+        <div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.Name) :
+            </span>
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.BirthDate) :
+            </span>
             @Html.DisplayFor(model => model.BirthDate)
-        </dd>
+        </div>
+        <div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.CountryId) :
+            </span>
+            @Html.DisplayFor(model => model.CountryId)
+        </div>
+        <div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.Sexe) :
+            </span>
+            @Html.DisplayFor(model => model.Sexe)
+        </div>
+    </div>
 
-    </dl>
 </div>
 
 <h4>Filmographie</h4>

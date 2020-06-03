@@ -20,7 +20,7 @@ namespace MoviesManager.Controllers
         {
             return PartialView(films);
         }
-
+        [AdminAcces]
         public ActionResult Create()
         {
             ViewBag.SelectedActors = new List<ListItem>();
@@ -40,7 +40,7 @@ namespace MoviesManager.Controllers
             ViewBag.Actors = film.ActorsList();
             return View(film.ToFilmView());
         }
-
+        [AdminAcces]
         public ActionResult Edit(int id)
         {
             Film film = DB.Films.Find(id);
@@ -55,7 +55,7 @@ namespace MoviesManager.Controllers
             DB.UpdateFilm(filmView, SelectedItems);
             return RedirectToAction("Index");
         }
-
+        [AdminAcces]
         public ActionResult Delete(int id)
         {
             return View(DB.Films.Find(id).ToFilmView());

@@ -2,6 +2,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.Label("Poster")
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
@@ -14,36 +17,54 @@
         @if ((bool)ViewBag.ShowCrudCommand)
         {
             <th></th>
-            <th>
-                @Helper.FlashButton("Create", "Films", "iconPlus", "Ajouter un film", "left")
-            </th>
+            if (MoviesManager.Models.OnlineUsers.GetSessionUser() != null && MoviesManager.Models.OnlineUsers.GetSessionUser().Admin)
+            {
+                <th>
+                    @Helper.FlashButton("Create", "Films", "iconPlus", "Ajouter un film", "left")
+                </th>
+            }
         }
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Helper.FlashButton("Details/" + item.Id, "Films", "iconDetails", "Détails", "left")
-            </td>
-            @if ((bool)ViewBag.ShowCrudCommand)
+    <tr>
+        <td style="width:100px;height:100px">
+
+            @Helper.Image(item.GetPosterURL())
+
+
+        </td>
+        <td style="vertical-align:middle">
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td style="vertical-align:middle">
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td style="vertical-align:middle">
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td style="vertical-align:middle">
+            @Helper.FlashButton("Details/" + item.Id, "Films", "iconDetails", "Détails", "left")
+        </td>
+        @if ((bool)ViewBag.ShowCrudCommand)
+        {
+            if (MoviesManager.Models.OnlineUsers.GetSessionUser() != null && MoviesManager.Models.OnlineUsers.GetSessionUser().Admin)
             {
-                <td>
+                <td style="vertical-align:middle">
                     @Helper.FlashButton("Edit/" + item.Id, "Films", "iconEdit", "Modifier", "left")
                 </td>
-                <td>
+                <td style="vertical-align:middle">
                     @Helper.FlashButton("Delete/" + item.Id, "Films", "iconDelete", "Effacer", "left")
                 </td>
             }
-        </tr>
+        }
+    </tr>
     }
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/selections")
+    @Scripts.Render("~/bundles/imageUploader")
+}

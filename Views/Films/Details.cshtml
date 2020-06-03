@@ -10,8 +10,11 @@
     <tr>
         <td><h2>@Html.DisplayFor(model => model.Title)</h2></td>
         <td>&nbsp;</td>
-        <td>@Helper.FlashButton("Edit/" + Model.Id, "Films", "iconEdit", "Modifier", "left")</td>
-        <td>&nbsp;</td>
+        @if (MoviesManager.Models.OnlineUsers.GetSessionUser() != null && MoviesManager.Models.OnlineUsers.GetSessionUser().Admin)
+        {
+            <td>@Helper.FlashButton("Edit/" + Model.Id, "Films", "iconEdit", "Modifier", "left")</td>
+            <td>&nbsp;</td>
+        }
         <td>@Html.ActionLink("Retour", "Index")</td>
     </tr>
 </table>

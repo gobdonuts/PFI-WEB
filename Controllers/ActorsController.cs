@@ -25,7 +25,7 @@ namespace MoviesManager.Controllers
         {
             ViewBag.SelectedFilms = new List<ListItem>();
             ViewBag.Films = DB.FilmListItems();
-            return View();
+            return View(new ActorView());
         }
 
         [HttpPost]

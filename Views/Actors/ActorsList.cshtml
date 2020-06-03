@@ -2,6 +2,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.Label("Avatar")
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
@@ -10,34 +13,44 @@
         <th></th>
         @if ((bool)ViewBag.ShowCrudCommand)
         {
+
             <th></th>
-            <th>
-                @Helper.FlashButton("Create", "iconPlus", "Ajouter un acteur", "left")
-            </th>
+            if (MoviesManager.Models.OnlineUsers.GetSessionUser() != null && MoviesManager.Models.OnlineUsers.GetSessionUser().Admin)
+            {
+                <th>
+                    @Helper.FlashButton("Create", "iconPlus", "Ajouter un acteur", "left")
+                </th>
+            }
+
         }
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td style="width:100px;height:100px">
+                @Helper.Image(item.GetAvatarUrl())
+            </td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.BirthDate)
             </td>
-            <td>
+            <td style="vertical-align:middle">
                 @Helper.FlashButton("Details/" + item.Id, "Actors", "iconDetails", "Détails", "left")
             </td>
             @if ((bool)ViewBag.ShowCrudCommand)
             {
-
-                <td>
-                    @Helper.FlashButton("Edit/" + item.Id, "Actors", "iconEdit", "Modifier", "left")
-                </td>
-                <td>
-                    @Helper.FlashButton("Delete/" + item.Id, "Actors", "iconDelete", "Effacer", "left")
-                </td>
+                if (MoviesManager.Models.OnlineUsers.GetSessionUser() != null && MoviesManager.Models.OnlineUsers.GetSessionUser().Admin)
+                {
+                    <td style="vertical-align:middle">
+                        @Helper.FlashButton("Edit/" + item.Id, "Actors", "iconEdit", "Modifier", "left")
+                    </td>
+                    <td style="vertical-align:middle">
+                        @Helper.FlashButton("Delete/" + item.Id, "Actors", "iconDelete", "Effacer", "left")
+                    </td>
+                }
             }
         </tr>
     }

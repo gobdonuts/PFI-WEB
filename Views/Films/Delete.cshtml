@@ -5,43 +5,49 @@
 }
 
 
-<div>
-    <h3>Retrait de film</h3>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <div>
+        <h2></h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+        <table>
+            <tr>
+                <td><h2>@Html.DisplayFor(model => model.Title)</h2></td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
+        <div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
+            <div style="width:200px;height:300px">
+                @Helper.Image(Model.GetPosterURL())
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Year)
-        </dt>
+            </div>
+            <span style="font-weight:900">
+                @Html.DisplayNameFor(model => model.Synopsis) :
+            </span>
+            @Html.DisplayFor(model => model.Synopsis)
+            <div>
+                <div>
+                    <span style="font-weight:900">
+                        @Html.DisplayNameFor(model => model.Author) :
+                    </span>
+                    @Html.DisplayFor(model => model.Author)
+                </div>
+                <div>
+                    <span style="font-weight:900">
+                        @Html.DisplayNameFor(model => model.Year) :
+                    </span>
+                    @Html.DisplayFor(model => model.Year)
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Year)
-        </dd>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Effacer" class="btn btn-default" /> |
-            @Html.ActionLink("Retour", "Index")
+                <div class="form-actions no-color">
+                    <input type="submit" value="Effacer" class="btn btn-default" /> |
+                    @Html.ActionLink("Retour", "Index")
+                </div>
+            }
         </div>
-    }
-</div>
+    </div>

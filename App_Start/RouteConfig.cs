@@ -16,7 +16,7 @@ namespace MoviesManager
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Films", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Users", action = "Login", id = UrlParameter.Optional }
             );
         }
     }
