@@ -64,5 +64,6 @@
 }
 @{
     ViewBag.ShowCrudCommand = false;
+    ViewBag.idFilm = Model.Id;
     Html.RenderPartial("~/Views/Films/RatingsList.cshtml", (IEnumerable<MoviesManager.Models.RatingView>)ViewBag.Ratings);
 }

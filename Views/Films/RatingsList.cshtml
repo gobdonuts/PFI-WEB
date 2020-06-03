@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<MoviesManager.Models.RatingView>
 <h1>Reviews</h1>
-@{var idFilm = Model.ToArray()[0].FilmId;}
+@{ var idFilm = ViewBag.idFilm;}
 @Helper.FlashButton("Add/" + idFilm, "Films", "iconPlus", "Ajouter une critique", "left")
 <table class="table">
     <tr>
