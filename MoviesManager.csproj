@@ -274,7 +274,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Films\Index.cshtml" />
     <Content Include="Views\Films\Delete.cshtml" />
-    <Content Include="Views\Films\Create.cshtml" />
     <Content Include="Views\Films\Edit.cshtml" />
     <Content Include="Views\Actors\Index.cshtml" />
     <Content Include="Views\Actors\Create.cshtml" />
@@ -288,6 +287,7 @@
     <Content Include="Views\Users\Login.cshtml" />
     <Content Include="Views\Users\Profil.cshtml" />
     <Content Include="Views\Admin\UsersList.cshtml" />
+    <Content Include="Views\Films\Create.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
