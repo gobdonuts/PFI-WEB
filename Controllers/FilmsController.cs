@@ -121,5 +121,39 @@ namespace MoviesManager.Controllers
             return View(ratingView);
          
         }
+        [UserAcces]
+        public ActionResult EditComment(int id)
+        {
+            Rating comment = DB.Ratings.Find(id);
+            RatingView ratingView = comment.ToRatingView();
+            return View(ratingView);
+        }
+        [HttpPost]
+        public ActionResult EditComment(RatingView ratingView)
+        {
+            if (ModelState.IsValid)
+            {
+                if (ratingView.Comment == null || ratingView.Comment.Trim() == "")
+                {
+                    ModelState.AddModelError("Comment", "");
+                    return View(ratingView);
+                }
+                if (ratingView.Value == 0)
+                {
+                    ModelState.AddModelError("Value", "");
+                }
+                DB.UpdateRating(ratingView);
+                return RedirectToAction("Index");
+            }
+            return View(ratingView);
+        }
+        [UserAcces]
+        public ActionResult DeleteComment(int id)
+        {
+            Rating rating = DB.Ratings.Find(id);
+            RatingView rView = rating.ToRatingView();
+            DB.RemoveRating(rView);
+            return RedirectToAction("Index");
+        }
     }
 }
