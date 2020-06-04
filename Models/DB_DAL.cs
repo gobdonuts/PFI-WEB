@@ -156,6 +156,7 @@ namespace MoviesManager.Models
         {
             PhotoId = AvatarReference.SaveImage(AvatarImageData, PhotoId);
         }
+
         public void RemoveAvatar()
         {
             AvatarReference.Remove(PhotoId);

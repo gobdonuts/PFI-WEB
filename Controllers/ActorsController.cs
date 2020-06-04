@@ -49,6 +49,7 @@ namespace MoviesManager.Controllers
                 ViewBag.Country = new Models.Country();
                 ViewBag.Country.Name = "Inconnu";
             }
+            ViewBag.Sexe = actor.Sexe;
             return View(actor.ToActorView());
         }
 
@@ -59,6 +60,7 @@ namespace MoviesManager.Controllers
             ViewBag.Films = DB.FilmListItems();
             SelectList countries = new SelectList(DB.CountryListItems(), "Id", "Text", actor.CountryId, new[] { -1 });
             ViewBag.Countries = countries;
+            ViewBag.Sexes = actor.Sexe;
             return View(actor.ToActorView());
         }
 
