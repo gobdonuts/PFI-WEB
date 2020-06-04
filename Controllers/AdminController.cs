@@ -28,6 +28,8 @@ namespace MoviesManager.Controllers
         {
             User userToDelete = DB.FindByUserName(userName);
             userToDelete.ToUserView().RemoveAvatar();
+            List<Rating> lstRating = DB.Ratings.Where(r => r.UserId == userToDelete.Id).ToList();
+            DB.Ratings.RemoveRange(lstRating);
             DB.Users.Remove(userToDelete);
             DB.SaveChanges();
             return RedirectToAction("UsersList"); 
