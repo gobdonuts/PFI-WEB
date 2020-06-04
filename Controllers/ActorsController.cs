@@ -25,6 +25,8 @@ namespace MoviesManager.Controllers
         {
             ViewBag.SelectedFilms = new List<ListItem>();
             ViewBag.Films = DB.FilmListItems();
+            SelectList countries = new SelectList(DB.CountryListItems(),"Id","Text",0,new[] { -1 });
+            ViewBag.Countries = countries;
             return View(new ActorView());
         }
 
@@ -39,6 +41,14 @@ namespace MoviesManager.Controllers
         {
             Actor actor = DB.Actors.Find(id);
             ViewBag.Films = actor.FilmsList();
+            Models.Country pays = DB.Countries.Find(actor.CountryId);
+            if (pays != null)
+                ViewBag.Country = pays;
+            else
+            {
+                ViewBag.Country = new Models.Country();
+                ViewBag.Country.Name = "Inconnu";
+            }
             return View(actor.ToActorView());
         }
 
@@ -47,6 +57,8 @@ namespace MoviesManager.Controllers
             Actor actor = DB.Actors.Find(id);
             ViewBag.SelectedFilms = actor.FilmListItems();
             ViewBag.Films = DB.FilmListItems();
+            SelectList countries = new SelectList(DB.CountryListItems(), "Id", "Text", actor.CountryId, new[] { -1 });
+            ViewBag.Countries = countries;
             return View(actor.ToActorView());
         }
 

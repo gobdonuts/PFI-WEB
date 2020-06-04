@@ -29,7 +29,8 @@ namespace MoviesManager.Controllers
         {
             ViewBag.SelectedActors = new List<MoviesManager.Models.ListItem>();
             ViewBag.Actors = DB.ActorListItems();
-            ViewBag.Audiences = new SelectList(DB.Audiences);
+            SelectList audiences = new SelectList(DB.AudienceListItems(), "Id", "Text", 0, new[] { -1 });
+            ViewBag.Audiences = audiences;
             ViewBag.Styles = new SelectList(DB.Styles);
             return View(new FilmView());
         }
@@ -56,6 +57,14 @@ namespace MoviesManager.Controllers
             }
             ViewBag.Ratings = ratings.ToRatingViewList();
             ViewBag.Avg = avgRating;
+            Models.Audience audience = DB.Audiences.Find(film.AudienceId);
+            if (audience != null)
+                ViewBag.Audience = audience;
+            else
+            {
+                ViewBag.Audience = new Models.Audience();
+                ViewBag.Audience.Name = "Inconnu";
+            }
             return View(film.ToFilmView());
         }
         [AdminAcces]
@@ -64,6 +73,8 @@ namespace MoviesManager.Controllers
             Film film = DB.Films.Find(id);
             ViewBag.SelectedActors = film.ActorListItems();
             ViewBag.Actors = DB.ActorListItems();
+            SelectList audiences = new SelectList(DB.AudienceListItems(), "Id", "Text", film.AudienceId, new[] { -1 });
+            ViewBag.Audiences = audiences;
             return View(film.ToFilmView());
         }
         [HttpPost]

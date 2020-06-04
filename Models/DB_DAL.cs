@@ -404,6 +404,25 @@ namespace MoviesManager.Models
             }
             return films;
         }
+ 
+        public static List<ListItem> CountryListItems(this Actor actor)
+        {
+            List<ListItem> countries = new List<ListItem>();
+            countries.Add(new ListItem() { Id = actor.CountryId });
+            return countries;
+        }
+        public static List<ListItem> CountryListItems(this DBEntities DB)
+        {
+            List<ListItem> countries = new List<ListItem>();
+            if (DB.Countries != null)
+            {
+                foreach (Country country in DB.Countries)
+                {
+                    countries.Add(new ListItem() { Id = country.Id, Text = country.Name });
+                }
+            }
+            return countries;
+        }
         public static List<ListItem> AudienceListItems(this DBEntities DB)
         {
             List<ListItem> audiences = new List<ListItem>();
