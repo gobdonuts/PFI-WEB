@@ -20,7 +20,7 @@ namespace MoviesManager.Controllers
         {
             return PartialView(actors);
         }
-
+        [AdminAcces]
         public ActionResult Create()
         {
             ViewBag.SelectedFilms = new List<ListItem>();
@@ -33,10 +33,24 @@ namespace MoviesManager.Controllers
         [HttpPost]
         public ActionResult Create(ActorView actorView, List<int> SelectedItems/*Liste des Id des films sélectionés*/)
         {
-            DB.AddActor(actorView, SelectedItems);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                if (actorView.Name == null || actorView.Name.Trim() == "")
+                {
+                    ModelState.AddModelError("Name", "");
+                    return View(actorView);
+                }
+                if (actorView.Sexe < 0 || actorView.Sexe > 2)
+                {
+                    ModelState.AddModelError("Sexe", "");
+                }
+                DB.AddActor(actorView, SelectedItems);
+                return RedirectToAction("Index");
+            }
+            return View(actorView);
+           
         }
-
+        [UserAcces]
         public ActionResult Details(int id)
         {
             Actor actor = DB.Actors.Find(id);
@@ -51,7 +65,7 @@ namespace MoviesManager.Controllers
             }
             return View(actor.ToActorView());
         }
-
+        [AdminAcces]
         public ActionResult Edit(int id)
         {
             Actor actor = DB.Actors.Find(id);
@@ -68,7 +82,7 @@ namespace MoviesManager.Controllers
             DB.UpdateActor(actorView, SelectedItems);
             return RedirectToAction("Index");
         }
-
+        [AdminAcces]
         public ActionResult Delete(int id)
         {
             return View(DB.Actors.Find(id).ToActorView());

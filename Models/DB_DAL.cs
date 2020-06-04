@@ -28,12 +28,21 @@ namespace MoviesManager.Models
         [Required(ErrorMessage = "Requis")]
         [Display(Name = "Auteur")]
         public string Author { get; set; }
+
+        [Required(ErrorMessage = "Requis")]
+        [Display(Name = "Audience")]
         public int AudienceId { get; set; }
+
+        [Required(ErrorMessage = "Requis")]
+        [Display(Name = "Style")]
         public int StyleId { get; set; }
 
         [Required(ErrorMessage = "Requis")]
         [Display(Name = "Année")]
         public int Year { get; set; }
+
+        [Required(ErrorMessage = "Requis")]
+        [Display(Name = "Poster")]
         public string PosterId { get; set; }
         public double RatingsAverage { get; set; }
         public int NbRatings { get; set; }
